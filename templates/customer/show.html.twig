@@ -3,6 +3,17 @@
 {% block title %}Customer
 {% endblock %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	{% block importmap %}
+		{{ importmap('app') }}
+	{% endblock %}
+{% endblock %}
+
 {% block body %}
 	<h1>{{ customer.name }}</h1>
 
@@ -19,11 +30,16 @@
 			</p>
 		</div>
 		<div class="col-md-4">
-			<a class="link-opacity-50" href="tel:{{ customer.phone }}">Appeler</a>
-			<a class="link-opacity-50" href="tel:{{ customer.email }}">Courriel</a>
+			<address>
+				<a class="link-opacity-50" href="tel:{{ customer.phone }}">Appeler</a>
+				<a class="link-opacity-50" href="mailto:{{ customer.email }}">Courriel</a>
+				<p>{{ customer.address }}</p>
+				<span>{{ customer.npa }}</span>
+				<span>{{ customer.city }}</span>
+			</address>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row my-2 px-3">
 		<div id="map"></div>
 	</div>
 

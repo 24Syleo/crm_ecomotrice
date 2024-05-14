@@ -12,34 +12,35 @@
 			<a class="btn success mt-2" href="{{ path('app_customer.new') }}">Create new</a>
 		</div>
 	</div>
+	<div class="row">
+		{% for customer in customers %}
 
-	{% for customer in customers %}
-
-		<div class="card" style="width: 18rem;">
-			<img src="{{ vich_uploader_asset(customer) }}" class="card-img-top" alt="{{ customer.name }}">
-			<div class="card-body">
-				<h5 class="card-title">{{ customer.name }}</h5>
-				<div class="row mb-3">
-					<div class="col-6">
-						<a class="link-opacity-50" href="tel:{{ customer.phone }}">Appeler</a>
+			<div class="card mx-1" style="width: 18rem;">
+				<img src="{{ vich_uploader_asset(customer) }}" class="card-img-top" alt="{{ customer.name }}">
+				<div class="card-body">
+					<h5 class="card-title">{{ customer.name }}</h5>
+					<div class="row mb-3">
+						<div class="col-6">
+							<a class="link-opacity-50" href="tel:{{ customer.phone }}">Appeler</a>
+						</div>
+						<div class="col-6">
+							<a class="link-opacity-50" href="mailto:{{ customer.email }}">Courriel</a>
+						</div>
 					</div>
-					<div class="col-6">
-						<a class="link-opacity-50" href="tel:{{ customer.email }}">Courriel</a>
-					</div>
-				</div>
-				<div class="row mb-3">
-					<div class="col-6">
-						<a class="btn warning" href="{{ path('app_customer.show', {'id': customer.id}) }}">show</a>
-					</div>
-					<div class="col-6">
-						<a class="btn primary" href="{{ path('app_customer.edit', {'id': customer.id}) }}">edit</a>
+					<div class="row mb-3">
+						<div class="col-6">
+							<a class="btn warning" href="{{ path('app_customer.show', {'id': customer.id}) }}">show</a>
+						</div>
+						<div class="col-6">
+							<a class="btn primary" href="{{ path('app_customer.edit', {'id': customer.id}) }}">edit</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	{% else %}
-		<tr>
-			<td colspan="10">no records found</td>
-		</tr>
-	{% endfor %}
+		{% else %}
+			<div class="alert primary">
+				no record found
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

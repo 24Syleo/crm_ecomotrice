@@ -1,13 +1,21 @@
-const lon = document.getElementById("lon").value;
-const lat = document.getElementById("lat").value;
+function initMap() {
+  const inputLon = document.getElementById("lon");
+  const inputLat = document.getElementById("lat");
 
-console.log(lon, lat);
+  if (inputLon === undefined || inputLat === undefined) return;
+  if (!inputLon || !inputLat) return;
 
-const map = L.map("map").setView([lon, lat], 16);
-var marker = L.marker([lon, lat]).addTo(map);
+  const lon = inputLon.value;
+  const lat = inputLat.value;
 
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution:
-    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
+  const map = L.map("map").setView([lon, lat], 16);
+  const marker = L.marker([lon, lat]).addTo(map);
+
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+}
+
+initMap();

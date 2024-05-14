@@ -3,6 +3,14 @@
 {% block title %}New Customer
 {% endblock %}
 
+{% block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	{% block importmap %}
+		{{ importmap('app') }}
+	{% endblock %}
+{% endblock %}
+
 {% block body %}
 	<h1>Create new Customer</h1>
 
