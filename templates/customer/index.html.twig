@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Customer index
+{% block title %}Customer list
 {% endblock %}
 
 {% block body %}
@@ -21,10 +21,10 @@
 				<h5 class="card-title">{{ customer.name }}</h5>
 				<div class="row mb-3">
 					<div class="col-6">
-						<a href="tel:{{ customer.phone }}">Appeler</a>
+						<a class="link-opacity-50" href="tel:{{ customer.phone }}">Appeler</a>
 					</div>
 					<div class="col-6">
-						<a href="tel:{{ customer.email }}">Courriel</a>
+						<a class="link-opacity-50" href="tel:{{ customer.email }}">Courriel</a>
 					</div>
 				</div>
 				<div class="row mb-3">

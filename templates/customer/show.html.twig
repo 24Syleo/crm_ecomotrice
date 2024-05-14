@@ -4,48 +4,28 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Customer</h1>
+	<h1>{{ customer.name }}</h1>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ customer.id }}</td>
-			</tr>
-			<tr>
-				<th>Name</th>
-				<td>{{ customer.name }}</td>
-			</tr>
-			<tr>
-				<th>Address</th>
-				<td>{{ customer.address }}</td>
-			</tr>
-			<tr>
-				<th>Npa</th>
-				<td>{{ customer.npa }}</td>
-			</tr>
-			<tr>
-				<th>City</th>
-				<td>{{ customer.city }}</td>
-			</tr>
-			<tr>
-				<th>Information</th>
-				<td>{{ customer.information }}</td>
-			</tr>
-			<tr>
-				<th>Logo</th>
-				<td>{{ customer.logo }}</td>
-			</tr>
-			<tr>
-				<th>Lat</th>
-				<td>{{ customer.lat }}</td>
-			</tr>
-			<tr>
-				<th>Lng</th>
-				<td>{{ customer.lng }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<input type="hidden" id="lat" value="{{ customer.lat }}">
+	<input type="hidden" id="lon" value="{{ customer.lng }}">
+
+	<div class="row">
+		<div class="col-md-4">
+			<img src="{{ vich_uploader_asset(customer) }}" class="img-fluid" alt="{{ customer.name }}">
+		</div>
+		<div class="col-md-4">
+			<p>
+				{{ customer.information }}
+			</p>
+		</div>
+		<div class="col-md-4">
+			<a class="link-opacity-50" href="tel:{{ customer.phone }}">Appeler</a>
+			<a class="link-opacity-50" href="tel:{{ customer.email }}">Courriel</a>
+		</div>
+	</div>
+	<div class="row">
+		<div id="map"></div>
+	</div>
 
 	<a class="btn warning" href="{{ path('app_customer.index') }}">back to list</a>
 	<a class="btn primary" href="{{ path('app_customer.edit', {'id': customer.id}) }}">edit</a>
