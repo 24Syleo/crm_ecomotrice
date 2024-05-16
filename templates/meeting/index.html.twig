@@ -1,29 +1,21 @@
-<table class="table">
-	<thead>
+<div class="d-flex flex-column justify-content-center align-items-center">
+	{% for meeting in meetings %}
+
+		<div class="card mb-1" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">{{ meeting.subject }}</h5>
+				<h6 class="card-subtitle mb-2 text-body-secondary">{{ meeting.address }}</h6>
+				<p class="card-text">De
+					{{ meeting.startDate ? meeting.startDate|date('d-m-Y H:i') : '' }}
+					à
+					{{ meeting.endDate ? meeting.endDate|date('d-m-Y H:i') : '' }}</p>
+				<a class="btn primary mb-1" href="{{ path('app_meeting.show', {'id': meeting.id}) }}">show</a>
+				{{ include('meeting/_delete_form.html.twig') }}
+			</div>
+		</div>
+	{% else %}
 		<tr>
-			<th>StartDate</th>
-			<th>EndDate</th>
-			<th>Subject</th>
-			<th>Address</th>
-			<th>actions</th>
+			<td colspan="7">no records found</td>
 		</tr>
-	</thead>
-	<tbody>
-		{% for meeting in meetings %}
-			<tr>
-				<td>{{ meeting.startDate ? meeting.startDate|date('Y-m-d') : '' }}</td>
-				<td>{{ meeting.endDate ? meeting.endDate|date('Y-m-d') : '' }}</td>
-				<td>{{ meeting.subject }}</td>
-				<td>{{ meeting.address }}</td>
-				<td>
-					<a class="btn primary" href="{{ path('app_meeting.show', {'id': meeting.id}) }}">show</a>
-					{{ include('meeting/_delete_form.html.twig') }}
-				</td>
-			</tr>
-		{% else %}
-			<tr>
-				<td colspan="7">no records found</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+	{% endfor %}
+</div>

@@ -16,11 +16,11 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-sm-9">
+		<div class="col-md-9">
 			<h1>{{ customer.name }}</h1>
 		</div>
-		<div class="col-sm-3 mt-2">
-			<a class="btn success" href="{{ path('app_meeting.new', { 'id': customer.id }) }}">Create new</a>
+		<div class="col-md-3 mt-2">
+			<a class="btn success" href="{{ path('app_meeting.new', { 'id': customer.id }) }}">New meeting</a>
 		</div>
 	</div>
 
@@ -47,16 +47,16 @@
 		</div>
 	</div>
 	<div class="row my-2 px-3">
-		<div class="col-sm-9">
+		<div class="col-md-9">
 			<div id="map"></div>
 		</div>
-		<div class="col-sm-3">
+		<div class="col-md-3">
 			{{ include('meeting/index.html.twig') }}
 		</div>
 	</div>
-
-	<a class="btn warning" href="{{ path('app_customer.index') }}">back to list</a>
-	<a class="btn primary" href="{{ path('app_customer.edit', {'id': customer.id}) }}">edit</a>
-
-	{{ include('customer/_delete_form.html.twig') }}
+	<div>
+		<a class="btn warning" href="{{ path('app_customer.index') }}">back to list</a>
+		<a class="btn primary" href="{{ path('app_customer.edit', {'id': customer.id}) }}">edit</a>
+		{{ include('customer/_delete_form.html.twig') }}
+	</div>
 {% endblock %}

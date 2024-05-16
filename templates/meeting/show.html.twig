@@ -11,11 +11,11 @@
 		<tbody>
 			<tr>
 				<th>StartDate</th>
-				<td>{{ meeting.startDate ? meeting.startDate|date('Y-m-d') : '' }}</td>
+				<td>{{ meeting.startDate ? meeting.startDate|date('d-m-Y H') : '' }}</td>
 			</tr>
 			<tr>
 				<th>EndDate</th>
-				<td>{{ meeting.endDate ? meeting.endDate|date('Y-m-d') : '' }}</td>
+				<td>{{ meeting.endDate ? meeting.endDate|date('d-m-Y H') : '' }}</td>
 			</tr>
 			<tr>
 				<th>Subject</th>
