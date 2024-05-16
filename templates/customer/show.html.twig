@@ -15,7 +15,14 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ customer.name }}</h1>
+	<div class="row">
+		<div class="col-sm-9">
+			<h1>{{ customer.name }}</h1>
+		</div>
+		<div class="col-sm-3 mt-2">
+			<a class="btn success" href="{{ path('app_meeting.new', { 'id': customer.id }) }}">Create new</a>
+		</div>
+	</div>
 
 	<input type="hidden" id="lat" value="{{ customer.lat }}">
 	<input type="hidden" id="lon" value="{{ customer.lng }}">
@@ -40,7 +47,12 @@
 		</div>
 	</div>
 	<div class="row my-2 px-3">
-		<div id="map"></div>
+		<div class="col-sm-9">
+			<div id="map"></div>
+		</div>
+		<div class="col-sm-3">
+			{{ include('meeting/index.html.twig') }}
+		</div>
 	</div>
 
 	<a class="btn warning" href="{{ path('app_customer.index') }}">back to list</a>

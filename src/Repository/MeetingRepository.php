@@ -16,6 +16,19 @@ class MeetingRepository extends ServiceEntityRepository
         parent::__construct($registry, Meeting::class);
     }
 
+    /**
+     * @return Meeting[] Returns an array of Meeting objects
+     */
+    public function getMeetingsByCustomer($customer): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.customer = :customer')
+            ->setParameter('customer', $customer)
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Meeting[] Returns an array of Meeting objects
     //     */

@@ -1,42 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Meeting{% endblock %}
+{% block title %}Meeting
+{% endblock %}
 
 {% block body %}
-    <h1>Meeting</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ meeting.id }}</td>
-            </tr>
-            <tr>
-                <th>StartDate</th>
-                <td>{{ meeting.startDate ? meeting.startDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndDate</th>
-                <td>{{ meeting.endDate ? meeting.endDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Subject</th>
-                <td>{{ meeting.subject }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ meeting.address }}</td>
-            </tr>
-            <tr>
-                <th>Details</th>
-                <td>{{ meeting.details }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<a class="btn success" href="{{ path('app_meeting.download', { 'id' : meeting.id }) }}">Télécharger</a>
 
-    <a href="{{ path('app_meeting_index') }}">back to list</a>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>StartDate</th>
+				<td>{{ meeting.startDate ? meeting.startDate|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>EndDate</th>
+				<td>{{ meeting.endDate ? meeting.endDate|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Subject</th>
+				<td>{{ meeting.subject }}</td>
+			</tr>
+			<tr>
+				<th>Address</th>
+				<td>{{ meeting.address }}</td>
+			</tr>
+			<tr>
+				<th>Details</th>
+				<td>{{ meeting.details }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_meeting_edit', {'id': meeting.id}) }}">edit</a>
+	<a class="btn warning" href="{{ path('app_customer.index') }}">back to list</a>
 
-    {{ include('meeting/_delete_form.html.twig') }}
+	{{ include('meeting/_delete_form.html.twig') }}
 {% endblock %}

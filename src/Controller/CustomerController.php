@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Customer;
 use App\Form\CustomerType;
 use App\Repository\CustomerRepository;
+use App\Repository\MeetingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,11 +50,19 @@ class CustomerController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Customer $customer): Response
+    public function show(Customer $customer, MeetingRepository $meetingRepository): Response
     {
-        return $this->render('customer/show.html.twig', [
-            'customer' => $customer,
-        ]);
+        try {
+
+            $meetings = $meetingRepository->getMeetingsByCustomer($customer);
+
+            return $this->render('customer/show.html.twig', [
+                'customer' => $customer,
+                'meetings' => $meetings
+            ]);
+        } catch (Exception $e) {
+            $this->addFlash('danger', $e->getMessage());
+        }
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]

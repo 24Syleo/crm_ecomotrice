@@ -33,8 +33,10 @@ class Meeting
     private ?string $details = null;
 
     #[ORM\ManyToOne(inversedBy: 'meetings')]
-    #[Assert\NotBlank()]
     private ?Customer $customer = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $fileName = null;
 
     public function getId(): ?int
     {
@@ -109,6 +111,18 @@ class Meeting
     public function setCustomer(?Customer $customer): static
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(string $fileName): static
+    {
+        $this->fileName = $fileName;
 
         return $this;
     }
