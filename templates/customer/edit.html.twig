@@ -6,7 +6,7 @@
 {% block body %}
 	<h1>Edit Customer</h1>
 
-	{{ include('customer/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('customer/_form.html.twig') }}
 
 	<a class="btn primary" href="{{ path('app_customer.index') }}">back to list</a>
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use App\Repository\CustomerRepository;
@@ -67,6 +69,17 @@ class Customer
     #[Assert\NotBlank()]
     #[Assert\Email()]
     private ?string $email = null;
+
+    /**
+     * @var Collection<int, Meeting>
+     */
+    #[ORM\OneToMany(targetEntity: Meeting::class, mappedBy: 'customer')]
+    private Collection $meetings;
+
+    public function __construct()
+    {
+        $this->meetings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -201,6 +214,36 @@ class Customer
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Meeting>
+     */
+    public function getMeetings(): Collection
+    {
+        return $this->meetings;
+    }
+
+    public function addMeeting(Meeting $meeting): static
+    {
+        if (!$this->meetings->contains($meeting)) {
+            $this->meetings->add($meeting);
+            $meeting->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeeting(Meeting $meeting): static
+    {
+        if ($this->meetings->removeElement($meeting)) {
+            // set the owning side to null (unless already changed)
+            if ($meeting->getCustomer() === $this) {
+                $meeting->setCustomer(null);
+            }
+        }
 
         return $this;
     }

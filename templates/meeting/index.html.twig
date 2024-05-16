@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meeting index{% endblock %}
+
+{% block body %}
+    <h1>Meeting index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>Subject</th>
+                <th>Address</th>
+                <th>Details</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for meeting in meetings %}
+            <tr>
+                <td>{{ meeting.id }}</td>
+                <td>{{ meeting.startDate ? meeting.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ meeting.endDate ? meeting.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ meeting.subject }}</td>
+                <td>{{ meeting.address }}</td>
+                <td>{{ meeting.details }}</td>
+                <td>
+                    <a href="{{ path('app_meeting_show', {'id': meeting.id}) }}">show</a>
+                    <a href="{{ path('app_meeting_edit', {'id': meeting.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_meeting_new') }}">Create new</a>
+{% endblock %}
