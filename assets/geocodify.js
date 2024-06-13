@@ -16,8 +16,6 @@ function getGpsPoint() {
         evt.target.value
     );
 
-    console.log(result.bbox[0], result.bbox[1]);
-
     lat.value = result.bbox[0];
     lng.value = result.bbox[1];
   });
